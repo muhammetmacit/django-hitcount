@@ -3,10 +3,10 @@ from __future__ import unicode_literals
 
 from django.test import TestCase, RequestFactory
 from django.core.exceptions import PermissionDenied
-from django.core.urlresolvers import reverse
 from django.contrib.admin.sites import AdminSite
 from django.contrib.messages.storage.fallback import FallbackStorage
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 from hitcount.admin import HitAdmin, HitCountAdmin
 from hitcount.models import Hit, HitCount, BlacklistIP, BlacklistUserAgent

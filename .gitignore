@@ -4,3 +4,9 @@
 .AppleDouble
 *.swp
 *.sublime-*
+.idea
+.coverage
+.tox/
+django_hitcount.egg-info/
+.cache/
+geckodriver.log

@@ -1,26 +1,20 @@
 # -*- coding: utf-8 -*-
 
-from django.conf.urls import include, url
-from django.contrib import admin
-
 from blog import views
+from django.contrib import admin
+from django.urls import path, include
+
+from setup import hitcount
 
 admin.autodiscover()
 
 urlpatterns = [
-    url(r'^admin/', include(admin.site.urls)),
-    url(r'^$', views.IndexView.as_view(), name="index"),
+    path('admin/', admin.site.urls),
+    path('', views.IndexView.as_view(), name="index"),
 
-    url(r'^generic-detail-view-ajax/(?P<pk>\d+)/$',
-        views.PostDetailJSONView.as_view(),
-        name="ajax"),
-    url(r'^hitcount-detail-view/(?P<pk>\d+)/$',
-        views.PostDetailView.as_view(),
-        name="detail"),
-    url(r'^hitcount-detail-view-count-hit/(?P<pk>\d+)/$',
-        views.PostCountHitDetailView.as_view(),
-        name="detail-with-count"),
-
+    path('generic-detail-view-ajax/<int:pk>/', views.PostDetailJSONView.as_view(), name="ajax"),
+    path('hitcount-detail-view/<int:pk>/$', views.PostDetailView.as_view(), name="detail"),
+    path('hitcount-detail-view-count-hit/<int:pk>/$', views.PostCountHitDetailView.as_view(), name="detail-with-count"),
     # for our built-in ajax post view
-    url(r'hitcount/', include('hitcount.urls', namespace='hitcount')),
+    path('hitcount/', include(hitcount.urls)),
 ]
